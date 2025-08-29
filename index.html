@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            const isLocal = ['localhost', '127.0.0.1', '::1'].includes(location.hostname);
+            const baseHref = isLocal ? '/' : '/my-search-params/';
+            const base = document.createElement('base');
+            base.setAttribute('href', baseHref);
+            document.head.prepend(base); // insert as the first element in <head>
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,44 +20,52 @@
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="style.css">
     <title>My Search Params</title>
 </head>
 
 <body>
-    <h1>YouTube</h1>
-    <form action="https://www.youtube.com/results" method="GET">
-        <label for="search">Search YouTube:</label>
-        <input type="text" name="search_query" id="search">
-        <button type="submit">Search YouTube</button>
-    </form>
+    <div class="container">
+        <form action="https://www.youtube.com/results" method="GET" target="_blank">
+            <div class="row mt-3">
+                <div class="col-2"><label for="search">Search YouTube:</label></div>
+                <div class="col-8"><input type="text" name="search_query" id="search" class="myField"></div>
+                <div class="col-2"><button type="submit" class="myButton">Search YouTube</button></div>
+            </div>
+        </form>
+        <form action="https://www.google.com/search" target="_blank">
+            <div class="row mt-3">
+                <div class="col-2"><label for="gsearch">Search Google:</label></div>
+                <div class="col-8"><input type="text" name="q" id="gsearch" class="myField"></div>
+                <div class="col-2"><button type="submit" class="myButton">Search Google</button></div>
+            </div>
+        </form>
 
-    <h1>Google</h1>
-    <form action="https://www.google.com/search">
-        <label for="gsearch">Search Google:</label>
-        <input type="text" name="q" id="gsearch">
-        <button type="submit">Search Google</button>
-    </form>
+        <form action="https://www.wikihow.com/wikiHowTo" target="_blank">
+            <div class="row mt-3">
+                <div class="col-2"><label for="wikihow">Search WikiHow:</label></div>
+                <div class="col-8"><input type="text" name="search" id="wikihow" class="myField"></div>
+                <div class="col-2"><button type="submit" class="myButton">Search</button></div>
+            </div>
+        </form>
 
-    <h1>WikiHow</h1>
-    <form action="https://www.wikihow.com/wikiHowTo">
-        <label for="wikihow">Search WikiHow:</label>
-        <input type="text" name="search" id="wikihow">
-        <button type="submit">Search</button>
-    </form>
-
-    <h1>Pexel</h1>
-    <form action="https://images.pexels.com/photos/3184402/pexels-photo-3184402.jpeg" method="GET">
-        <label for="w">Width:</label>
-        <input type="number" name="w" id="w" value="600">
-
-        <label for="h">Height:</label>
-        <input type="number" name="h" id="h" value="400">
-
-        <label for="sepia">Sepia (0–100):</label>
-        <input type="text" name="sepia" id="sepia" value="80">
-
-        <button type="submit">View Image</button>
-    </form>
+        <h3 class="mt-4">Pexel</h3>
+        <form action="https://images.pexels.com/photos/3184402/pexels-photo-3184402.jpeg" method="GET" target="_blank">
+            <div class="row mt-3">
+                <div class="col-3"><label for="w">Width:</label></div>
+                <div class="col-2"><input class="numberField" type="number" name="w" id="w" value="600"></div>
+                <div class="col-1"></div>
+                <div class="col-3"><label for="sepia">Sepia (0–100):</label></div>
+                <div class="col-2"><input class="numberField" type="text" name="sepia" id="sepia" value="80"></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-3"><label for="h">Height:</label></div>
+                <div class="col-3"><input class="numberField" type="number" name="h" id="h" value="400"></div>
+                <div class="col-6 d-flex justify-content-center"><button type="submit" class="myButton">View Image</button></div>
+            </div>
+        </form>
+    </div>
+    </div>
 </body>
 
 </html>
